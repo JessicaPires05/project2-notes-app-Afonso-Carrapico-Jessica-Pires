@@ -1,0 +1,21 @@
+class QuoteModel {
+  final String id;
+  final String content;
+  final String author;
+
+  QuoteModel({required this.id, required this.content, required this.author});
+
+  factory QuoteModel.fromJson(Map<String, dynamic> json) {
+    return QuoteModel(
+      id: (json['_id'] ?? '') as String,
+      content: (json['content'] ?? '') as String,
+      author: (json['author'] ?? '') as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    '_id': id,
+    'content': content,
+    'author': author,
+  };
+}
