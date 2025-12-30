@@ -28,7 +28,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
 
   bool _loading = false;
 
-  /// imagens locais ainda não enviadas
+
   final List<String> _images = [];
 
   @override
@@ -49,12 +49,11 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
       _content.text = note.content;
       _tag = note.tags.isNotEmpty ? note.tags.first : 'Personal';
       _location = note.location;
-      _images.addAll(note.imagesBase64); // ✅ ESSENCIAL
+      _images.addAll(note.imagesBase64);
     });
   }
 
 
-  /* ---------------- IMAGENS ---------------- */
 
   Future<void> _pickGallery() async {
     try {
@@ -78,7 +77,6 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
     }
   }
 
-  /* ---------------- LOCALIZAÇÃO ---------------- */
 
   Future<void> _getLocation() async {
     setState(() => _loading = true);
@@ -95,7 +93,6 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
     }
   }
 
-  /* ---------------- CITAÇÃO ---------------- */
 
   Future<void> _citation() async {
     try {
@@ -119,7 +116,6 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
     }
   }
 
-  /* ---------------- GUARDAR ---------------- */
 
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
@@ -132,26 +128,26 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
       final contentTrimmed = _content.text.trim();
 
       if (widget.noteId == null) {
-        // Cria nova nota com imagens Base64
+
         await data.createNoteWithImages(
           title: titleTrimmed,
           content: contentTrimmed,
           tags: [_tag],
           location: _location,
-          imagesBase64: _images, // ✅ agora correto
+          imagesBase64: _images,
         );
 
 
         if (!mounted) return;
         showSnack(context, 'Nota criada.');
       } else {
-        // Atualiza nota existente
+
         await data.updateNote(widget.noteId!, {
           'title': titleTrimmed,
           'content': contentTrimmed,
           'tags': [_tag],
           'location': _location,
-          'imagesBase64': _images, // substitui tudo pelas novas imagens
+          'imagesBase64': _images,
           'updatedAt': Timestamp.now(),
         });
 
@@ -168,7 +164,6 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
     }
   }
 
-  /* ---------------- UI ---------------- */
 
   @override
   Widget build(BuildContext context) {

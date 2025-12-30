@@ -89,7 +89,6 @@ class DetailNoteScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: ListView(
               children: [
-                /// TAGS + DATAS
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
@@ -110,7 +109,6 @@ class DetailNoteScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                /// CONTEÚDO
                 Text(
                   note.content,
                   style: Theme.of(context).textTheme.bodyLarge,
@@ -118,7 +116,6 @@ class DetailNoteScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                /// LOCALIZAÇÃO
                 if (note.location != null)
                   Text(
                     'Localização: '
@@ -129,7 +126,6 @@ class DetailNoteScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                /// IMAGENS
                 if (note.imagesBase64.isNotEmpty) ...[
                   const Text(
                     'Imagens',

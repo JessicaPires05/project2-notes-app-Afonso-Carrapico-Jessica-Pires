@@ -36,13 +36,13 @@ class NativeService {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // 1️⃣ Verifica se o GPS está ligado
+
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       throw Exception('Serviço de localização desligado.');
     }
 
-    // 2️⃣ Verifica permissões
+
     permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
@@ -59,7 +59,7 @@ class NativeService {
       );
     }
 
-    // 3️⃣ Obtém localização
+
     return await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );

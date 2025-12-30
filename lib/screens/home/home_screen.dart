@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final text = await context.read<DataProvider>().dailyQuoteText();
       if (mounted) setState(() => _dailyQuote = text);
     } catch (_) {
-      // ignora
+
     }
   }
 
