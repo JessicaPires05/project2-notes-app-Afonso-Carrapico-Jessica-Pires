@@ -82,7 +82,7 @@ class DataProvider extends ChangeNotifier {
       title: title,
       content: content,
       tags: tags,
-      imagesBase64: imagesBase64, // ✅ agora usa corretamente
+      imagesBase64: imagesBase64,
       createdAt: now,
       updatedAt: now,
       location: location,
@@ -96,19 +96,19 @@ class DataProvider extends ChangeNotifier {
     required String noteId,
     required File file,
   }) async {
-    // converte para Base64
+
     final base64Image = await fileToBase64(file);
 
-    // obtém a nota
+
     final note = await _firestore.getNote(_uid, noteId);
     if (note == null) {
       throw Exception('Nota não encontrada');
     }
 
-    // adiciona a nova imagem
+
     final newImages = [...note.imagesBase64, base64Image];
 
-    // atualiza a nota
+
     await _firestore.updateNote(_uid, noteId, {
       'imagesBase64': newImages,
     });
@@ -139,7 +139,7 @@ class DataProvider extends ChangeNotifier {
 
 
   Future<void> deleteNoteWithCleanup(NoteModel note) async {
-    // Só apagar o documento do Firestore, já não existe Storage
+
     await _firestore.deleteNote(_uid, note.id);
     notifyListeners();
   }
